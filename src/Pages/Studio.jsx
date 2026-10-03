@@ -140,7 +140,9 @@ const Studio = () => {
             }
             toast.success(isUpdate ? "Code updated successfully!" : "Generation complete!");
         } catch (error) {
-            toast.error(isUpdate ? "Failed to update code." : "Failed to generate code.");
+            const action = isUpdate ? "Failed to update code" : "Failed to generate code";
+            const reason = error.response?.data?.message || error.message;
+            toast.error(reason ? `${action}: ${reason}` : `${action}. Please try again.`);
         } finally {
             setLoading(false);
         }
