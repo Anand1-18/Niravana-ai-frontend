@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 const getBaseURL = () => {
-    const rawUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const rawUrl = import.meta.env.VITE_API_URL || (
+        import.meta.env.DEV
+            ? 'http://localhost:5000'
+            : 'https://niravana-ai-backend.vercel.app'
+    );
     // Remove trailing slash
     const cleanUrl = rawUrl.replace(/\/$/, "");
     // Ensure /api is at the end if it's not already there
